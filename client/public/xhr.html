@@ -1,0 +1,30 @@
+<html>
+<head>
+	<script>
+
+		// This is how you set the cookie for (not only) XMLHttpRequest
+		document.cookie = "lang=en";
+
+       const xhr = new XMLHttpRequest();
+       xhr.open("GET", "http://localhost:3000", true);
+       xhr.onreadystatechange = () => {
+         if (xhr.readyState === XMLHttpRequest.DONE) {
+           console.log('xhr=', xhr);
+           console.log("xhr.responseText=", xhr.responseText);
+         }
+       }
+
+       xhr.setRequestHeader("Authorization", "Basic YWRtaW46YWRtaW5hZG1pbg==");
+       xhr.withCredentials = true;
+
+       	// This is *not* how you send a cookie with the request:
+       	// xhr.setRequestHeader("Cookie", "lang=en");
+		// it will cause error: Refused to set unsafe header "Cookie"
+
+       xhr.send("")
+	</script>
+</head>
+<body>
+<h1>Test</h1>
+</body>
+</html>
